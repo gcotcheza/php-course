@@ -15,4 +15,4 @@ The course covers fundamental PHP concepts, including:
 - Database Integration & PDO
 
 ## Acknowledgements
-- Thanks to [Brad Traversy](https://github.com/bradtraversy), the creator and instructor of this Udemy course ["PHP From Scratch"](https://www.udemy.com/course/php-from-scratch-course/?kw=php&src=sac) for the comprehensive and engaging content.
+- Thanks to [Brad Traversy](https://github.com/bradtraversy), the creator and instructor of this Udemy course [PHP From Scratch](https://www.udemy.com/course/php-from-scratch-course/?kw=php&src=sac) for the comprehensive and engaging content.
