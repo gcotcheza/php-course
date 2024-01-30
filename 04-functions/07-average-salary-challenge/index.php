@@ -42,18 +42,56 @@ $listings = [
   ],
 ];
 
-function formatSalary($salary)
+/**
+ * Format the salary into monetary unit.
+ */
+function formatSalary($salary): string
 {
   return '$' . number_format($salary);
 }
 
-function highlightTags($tags, $searchTerm)
+/**
+ * Highlight the tags based on search term. 
+ */
+function highlightTags($tags, $searchTerm): string
 {
   $tagsArray = implode(', ', $tags);
   return str_replace($searchTerm, "<span class='bg-yellow-200'>$searchTerm</span>", $tagsArray);
 }
-?>
 
+/**
+ * Calculate the average salary.
+ */
+function calculateAverageSalary($listings): string
+{
+
+  $totalSalary = 0;
+  $count = count($listings);
+
+  foreach($listings as $job) {
+    $totalSalary += $job['salary'];
+  }
+
+  $avgSalary = ($count > 0) ? $totalSalary / $count : 0 ;
+
+    return formatSalary($avgSalary);
+}
+
+/**
+ * Calculate the average salary using array_column.
+ */
+function calculateAvgSalary($listings): string
+{
+  $salaries = array_column($listings, 'salary');
+  $totalSalary = array_sum($salaries);
+  $count = count($listings);
+
+  $avgSalary = ($count > 0) ? $totalSalary / $count : 0 ;
+
+  return formatSalary($avgSalary);
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +111,7 @@ function highlightTags($tags, $searchTerm)
   </header>
   <div class="container mx-auto p-4 mt-4">
     <div class="bg-green-100 rounded-lg shadow-md p-6 my-6">
-      <h2 class="text-2xl font-semibold mb-4">Average Salary:</h2>
+      <h2 class="text-2xl font-semibold mb-4">Average Salary: <?= calculateAvgSalary($listings) ?></h2>
     </div>
     <!-- Output -->
     <?php foreach ($listings as $index => $job) : ?>
