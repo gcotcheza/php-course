@@ -1,3 +1,26 @@
+<?php 
+  require 'database.php';
+
+   if($_SERVER['REQUEST_METHOD'] === 'POST'  && isset($_POST['submit'])) {
+    $title = htmlspecialchars($_POST['title']);
+    $description = htmlspecialchars($_POST['description']);
+
+    $sql = 'INSERT INTO posts (title, description) VALUES (:title, :description)';
+
+    $stmt = $pdo->prepare($sql);
+
+    $params = [
+      'title' => $title, 
+      'description' => $description
+    ];
+
+    $stmt->execute($params);
+
+    header('Location: index.php');
+    exit;
+   }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +46,8 @@
           <input type="text" id="title" name="title" placeholder="Enter post title" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none">
         </div>
         <div class="mb-6">
-          <label for="body" class="block text-gray-700 font-medium">Body</label>
-          <textarea id="body" name="body" placeholder="Enter post body" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none"></textarea>
+          <label for="description" class="block text-gray-700 font-medium">Body</label>
+          <textarea id="description" name="description" placeholder="Enter post body" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none"></textarea>
         </div>
         <div class="flex items-center justify-between">
           <button type="submit" name="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">

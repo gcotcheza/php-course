@@ -2,15 +2,15 @@
 require_once 'database.php';
 
 $title = '';
-$body = '';
+$description = '';
 $submitted = false; // Flag to check if the form has been submitted
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   $title = htmlspecialchars($_POST['title'] ?? '');
-  $body = htmlspecialchars($_POST['body'] ?? '');
+  $description = htmlspecialchars($_POST['description'] ?? '');
 
   // INSERT statement with placeholders for title and body
-  $sql = 'INSERT INTO posts (title, body) VALUES (:title, :body)';
+  $sql = 'INSERT INTO posts (title, body) VALUES (:title, :description)';
 
   // Prepare the statement
   $stmt = $pdo->prepare($sql);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
   // Params for prepared statement
   $params = [
     'title' => $title,
-    'body' => $body
+    'description' => $description
   ];
 
   // Execute the statement
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         </div>
         <div class="mb-6">
           <label for="body" class="block text-gray-700 font-medium">Body</label>
-          <textarea id="body" name="body" placeholder="Enter post body" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none"><?= $body ?></textarea>
+          <textarea id="description" name="description" placeholder="Enter post body" class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-300 focus:outline-none"><?= $body ?></textarea>
         </div>
         <div class="flex items-center justify-between">
           <button type="submit" name="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <div class="mt-6 p-4 border rounded bg-gray-200">
           <h2 class="text-lg font-semibold">Submitted Job Listing:</h2>
           <p><strong>Title:</strong> <?= $title ?></p>
-          <p><strong>Body:</strong> <?= $body ?></p>
+          <p><strong>Description:</strong> <?= $description ?></p>
         </div>
       <?php endif; ?>
     </div>

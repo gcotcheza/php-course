@@ -23,7 +23,7 @@ $posts = $stmt->fetchAll();
   <title>Blog</title>
 </head>
 
-<body class="bg-gray-100">
+<body class=q"bg-gray-100">
   <header class="bg-blue-500 text-white p-4">
     <div class="container mx-auto">
       <h1 class="text-3xl font-semibold">My Blog</h1>
@@ -34,8 +34,8 @@ $posts = $stmt->fetchAll();
       <div class="md my-4">
         <div class="rounded-lg shadow-md">
           <div class="p-4">
-            <h2 class="text-xl font-semibold"><?= $post['title']; ?></h2>
-            <p class="text-gray-700 text-lg mt-2"><?= $post['body']; ?></p>
+            <h2 class="text-xl font-semibold"><a href="post.php?id=<?= $post['id'] ?>"><?= $post['title']; ?></a></h2>
+            <p class="text-gray-700 text-lg mt-2"><?= $post['description']; ?></p>
           </div>
         </div>
       </div>

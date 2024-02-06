@@ -47,7 +47,7 @@ $post = $stmt->fetch();
       <div class="rounded-lg shadow-md">
         <div class="p-4">
           <h2 class="text-xl font-semibold"><?= $post['title']; ?></h2>
-          <p class="text-gray-700 text-lg mt-2 mb-5"><?= $post['body']; ?></p>
+          <p class="text-gray-700 text-lg mt-2 mb-5"><?= $post['description']; ?></p>
           <a href="index.php">Go Back</a>
         </div>
       </div>

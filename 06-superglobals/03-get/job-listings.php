@@ -42,6 +42,8 @@ $listings = [
   ],
 ];
 
+$validLocations = ['Chicago', 'Seattle', 'San Franciso', 'New York'];
+
 function formatSalary($salary)
 {
   return '$' . number_format($salary, 2);
@@ -68,6 +70,22 @@ function calculateAverageSalary($listings)
 
   return formatSalary($averageSalary);
 }
+
+// Filter by location
+function filterListingByLocation($listings, $location) 
+{
+   return array_filter($listings, function($job) use ($location) {
+      return strcasecmp($job['location'], $location) === 0;
+   });
+}
+
+// Check if location string exist.
+if(isset($_GET['location']) && in_array($_GET['location'], $validLocations)) {
+  $location = $_GET['location'];
+  $filteredListings = filterListingByLocation($listings, $location);
+} else {
+  $filteredListings = $listings;
+}
 ?>
 
 
@@ -92,7 +110,7 @@ function calculateAverageSalary($listings)
       <h2 class="text-2xl font-semibold mb-4">Average Salary: <?= calculateAverageSalary($listings)  ?></h2>
     </div>
     <!-- Output -->
-    <?php foreach ($listings as $index => $job) : ?>
+    <?php foreach ($filteredListings as $index => $job) : ?>
       <div class="md my-4">
         <div class="rounded-lg shadow-md <?= $index % 2 === 0 ? 'bg-blue-100' : 'bg-white'; ?>">
           <div class="p-4">

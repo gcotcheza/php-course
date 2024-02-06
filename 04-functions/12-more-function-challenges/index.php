@@ -118,3 +118,30 @@ function findLongestWord(string $string): string
 }
 
 echo findLongestWord('I am looking for the longest word in this sentence');
+
+
+/*
+  The & before the parameter in foo() function inidcates that it takes a reference/pointer to a variable, 
+  modifies it's value, and returns the value, also updating the original variable's value.  
+ */
+function foo(&$arg)
+{
+  return ++$arg;
+}
+
+$arg = 5;
+var_dump(foo($arg)); // 6
+var_dump($arg); // 6
+
+/*
+The parameter passed to the bar() function without the & is copied, modified inside the function, 
+and returned to the caller without altering the original variable's value.
+ */
+function bar($arg)
+{
+  return ++$arg;
+}
+
+$arg = 5;
+var_dump(bar($arg)); // 6
+var_dump($arg); // 5

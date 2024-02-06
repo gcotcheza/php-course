@@ -1,3 +1,29 @@
+<?php
+  require 'database.php';
+
+  $id = $_GET['id'] ?? null;
+
+  if (!$id) {
+    header('Location: index.php');
+    exit;
+  }
+
+  // Prepared statement or parameterized queries against sql injections attacks. 
+  // This is separating the sql from the user input. 
+  $sql = 'SELECT * FROM posts WHERE id = :id';
+
+  $stmt = $pdo->prepare($sql);
+
+  $params = ['id' => $id];
+  
+  // Execute the query with the params.
+  $stmt->execute($params);
+
+  // Fetch a single row
+  $post = $stmt->fetch(); 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +44,8 @@
     <div class="md my-4">
       <div class="rounded-lg shadow-md">
         <div class="p-4">
-          <h2 class="text-xl font-semibold">Post One</h2>
-          <p class="text-gray-700 text-lg mt-2 mb-5">This is post one</p>
+          <h2 class="text-xl font-semibold"><?= $post['title'] ?> </h2>
+          <p class="text-gray-700 text-lg mt-2 mb-5"><?= $post['description'] ?></p>
           <a href="index.php">Go Back</a>
         </div>
       </div>

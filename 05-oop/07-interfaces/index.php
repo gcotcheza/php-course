@@ -1,5 +1,4 @@
 <?php
-
 // By implementing a interface, all methods inside interface must be implemented. 
 interface ContentInterface
 {
